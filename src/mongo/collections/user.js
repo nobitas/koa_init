@@ -1,6 +1,6 @@
 import Mongoose, { Schema } from 'mongoose';
 
-export  default new Schema({
+export default new Schema({
 	nickName: {
 		type: String,
 		label: '用户昵称'

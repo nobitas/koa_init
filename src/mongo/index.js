@@ -21,13 +21,9 @@ export default class MongoDB {
 		const DB = Mongoose.connection;
 		DB.on('error', console.error.bind(console, 'mongodb connection error:'));
 		DB.once('open',() => {
-			console.log('mongodb connection success!');
-			const db = Mongoose.model('User');
-			db.find({},(err, res) => {
-				console.log(res);
-			})
+			console.log('\x1b[36m%s\x1b[0m', 'mongodb connection success!');
 		})
 
-		Mongoose.model('User', UserSchema, 'User');
+		Mongoose.model('user', UserSchema, 'user');
 	}
 } 

@@ -1,6 +1,9 @@
 import Router from 'koa-router';
 import Request from 'request-promise';
 import cheerio from 'cheerio';
+
+import user from '../controller/user';
+
 const router = new Router();
 
 const Url = 'https://free.gyteng.com/';
@@ -16,9 +19,10 @@ router.get('/getSSURL', async ctx => {
 	});
 	const $ = cheerio.load(result);
 	ctx.body = $('div.address').text().trim();
+	IO.emit('hello', 'world 3');
 })
-router.post('/test', ctx => {
-	ctx.body = { test: 2 };
-})
+
+router.post('/user/create', user.add);
+router.get('/user/get', user.get);
 
 export default router;
