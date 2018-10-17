@@ -2,6 +2,7 @@ import nanoid from 'nanoid';
 import User from '../mongo/model/user';
 
 export default {
+	// 添加用户
 	async add (ctx) {
 		const { nickName = `user_${nanoid(10)}`, email, pwd } = ctx.request.body;
 		// 类型检测
@@ -20,6 +21,8 @@ export default {
 		const result = await new User().add(data);
 		ctx.body = result;
 	},
+
+	// 获取用户信息
 	async get (ctx) {
 		const { _id } = ctx.query;
 		try {

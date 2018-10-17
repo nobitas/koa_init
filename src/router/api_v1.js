@@ -3,11 +3,12 @@ import Request from 'request-promise';
 import cheerio from 'cheerio';
 
 import user from '../controller/user';
+import ReturnBook from '../controller/return_book';
+import Test from '../controller/test';
 
 const router = new Router();
 
 const Url = 'https://free.gyteng.com/';
-
 
 // 爬虫测试，抓取免费ss账号
 router.get('/getSSURL', async ctx => {
@@ -19,10 +20,17 @@ router.get('/getSSURL', async ctx => {
 	});
 	const $ = cheerio.load(result);
 	ctx.body = $('div.address').text().trim();
-	IO.emit('hello', 'world 3');
 })
 
 router.post('/user/create', user.add);
 router.get('/user/get', user.get);
+
+// 硬件接口
+router.post('/start_detect', ReturnBook.detect);
+router.post('/sendRFID', ReturnBook.sendRFID);
+
+// 测试返回接口
+router.post('/test/sendInfo', Test.sendInfo);
+router.post('/test/sendRFID', Test.sendRFID);
 
 export default router;
